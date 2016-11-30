@@ -1,0 +1,23 @@
+{
+  "name": "bum-guard",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-prelude": "^2.1.0",
+    "purescript-console": "^2.0.0",
+    "purescript-maps": "^2.0.0",
+    "purescript-node-streams": "^2.0.0",
+    "purescript-node-url": "^2.0.0",
+    "purescript-options": "^2.0.0",
+    "purescript-unsafe-coerce": "^2.0.0",
+    "purescript-node-http":"^3.0.1",
+    "purescript-affjax": "^3.0.1"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^2.0.0"
+  }
+}
