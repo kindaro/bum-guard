@@ -21,8 +21,6 @@ import Data.FormURLEncoded (fromArray, encode)
 import Control.Monad.Eff.Class (class MonadEff, liftEff)
 
 
-foreign import stdout :: forall eff r. Writable r eff
-
 requestBody = fromArray
                   [ Tuple "al" (Just $ show 1)
                   , Tuple "c[city]" (Just $ show 1965294)
