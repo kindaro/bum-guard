@@ -1,24 +1,13 @@
 module Main where
 
 import Prelude
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, log, logShow)
 
-import Data.Foldable (foldMap)
+import Control.Monad.Aff (runAff)
+import Control.Monad.Eff.Console (log)
+import Data.FormURLEncoded (fromArray, encode)
 import Data.Maybe (Maybe(..))
-
-import Node.Encoding (Encoding(..))
-import Node.HTTP (HTTP, listen, createServer, setHeader, requestMethod, requestURL, responseAsStream,           requestAsStream, setStatusCode)
-import Node.HTTP.Client as Client
-import Node.Stream (Writable, end, pipe, writeString)
-
-import Partial.Unsafe (unsafeCrashWith)
-
-import Control.Monad.Aff (launchAff)
 import Data.Tuple (Tuple(..))
 import Network.HTTP.Affjax
-import Data.FormURLEncoded (fromArray, encode)
-import Control.Monad.Eff.Class (class MonadEff, liftEff)
 
 
 requestBody = fromArray
@@ -35,10 +24,9 @@ requestBody = fromArray
 
 requestUri = "https://vk.com/al_search.php"
 
-main = void $ launchAff $ do
+main = runAff (const $ pure unit) (cb) (post requestUri requestBody :: forall e. Affjax e String)
 
-  res <- post requestUri requestBody
-  liftEff $ log res.response
+cb = (\x -> x.response) >>> show >>> log
 
 -- curl 'https://vk.com/al_search.php'
 --     --data
